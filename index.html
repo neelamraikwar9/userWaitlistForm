@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>HTML + CSS</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>User Waitlist Form</h1>
+
+    <form id="userWaitlistForm">
+      <label for="userName"><strong>Full Name:</strong></label>
+      <input type="text" id="userName" />
+      <br />
+      <br />
+
+      <label for="num"><strong>Phone Number:</strong></label>
+      <input type="number" id="num" />
+      <br />
+      <br />
+
+      <label for="email"><strong>Email Id:</strong></label>
+      <input type="email" id="email" />
+      <br />
+      <br />
+
+      <label><strong>Gender:</strong></label>
+      <br />
+      <label for="Male">
+        <input type="radio" name="gender" value="Male" id="Male" />Male
+      </label>
+      <br />
+      <label for="Female">
+        <input type="radio" name="gender" value="Female" id="Female" />Female
+      </label>
+      <br />
+      <label for="Other">
+        <input type="radio" name="gender" value="Other" id="Other" />Other
+      </label>
+      <br />
+      <br />
+
+      <label><strong>Are you a college graduate?:</strong></label>
+      <br />
+      <label for="Yes">
+        <input type="radio" name="college" value="Yes" id="Yes" />Yes
+      </label>
+      <br />
+      <label for="No">
+        <input type="radio" name="college" value="No" id="No" />No
+      </label>
+      <br />
+      <label for="Dropout">
+        <input
+          type="radio"
+          name="college"
+          value="Dropout"
+          id="Dropout"
+        />Dropout
+      </label>
+      <br />
+      <br />
+
+      <label
+        ><strong
+          >Are you working anywhere full-time or part-time?:</strong
+        ></label
+      >
+      <br />
+      <select id="workingSelect">
+        <option value="Working Full Time">Working Full Time</option>
+        <option value="Working Part Time">Working Part Time</option>
+        <option value="Not Working Anywhere">Not Working Anywhere</option>
+      </select>
+      <br />
+      <br />
+
+      <label for="learnWhy"
+        ><strong>Why do you want to learn web development?:</strong></label
+      >
+      <br />
+      <textarea id="learnWhy" rows="4" cols="50"></textarea>
+      <br />
+      <br />
+
+      <label><strong>How did you come to know about us?</strong></label>
+      <br />
+      <label for="Youtube">
+        <input
+          type="checkbox"
+          name="platform"
+          value="Youtube"
+          id="Youtube"
+        />Youtube
+      </label>
+      <br />
+      <label for="Instagram">
+        <input
+          type="checkbox"
+          name="platform"
+          value="Instagram"
+          id="Instagram"
+        />Instagram
+      </label>
+      <br />
+      <label for="Linkedin">
+        <input
+          type="checkbox"
+          name="platform"
+          value="Linkedin"
+          id="Linkedin"
+        />Linkedin
+      </label>
+      <br />
+      <label for="Twitter">
+        <input
+          type="checkbox"
+          name="platform"
+          value="Twitter"
+          id="Twitter"
+        />Twitter
+      </label>
+      <br />
+      <label for="Friends">
+        <input
+          type="checkbox"
+          name="platform"
+          value="Friends and Family"
+          id="Friends"
+        />Friends and Family
+      </label>
+      <br />
+      <label for="other">
+        <input type="checkbox" name="platform" value="Other" id="other" />Other
+      </label>
+      <br />
+      <br />
+
+      <input type="checkbox" id="information" /><strong
+        >I confirm that all information in this form is factually true.</strong
+      >
+      <br />
+      <br />
+
+      <input type="submit" value="Submit Details" />
+    </form>
+
+    <div id="userDataForWaitlist"></div>
+
+    <script>
+      const userWaitlistForm = document.getElementById("userWaitlistForm");
+      userWaitlistForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const userName = document.getElementById("userName").value;
+        const num = document.getElementById("num").value;
+        const email = document.getElementById("email").value;
+        const gender = document.querySelector(
+          'input[name="gender"]:checked'
+        ).value;
+        const college = document.querySelector(
+          'input[name="college"]:checked'
+        ).value;
+        const workingSelect = document.getElementById("workingSelect").value;
+        const learnWhy = document.getElementById("learnWhy").value;
+
+        const platform = document.querySelectorAll(
+          'input[name="platform"]:checked'
+        );
+        let socialPlatform = [];
+        for (let i = 0; i < platform.length; i++) {
+          socialPlatform.push(platform[i].value);
+        }
+
+        const information = document.getElementById("information").value;
+
+        // console.log(
+        //   userName,
+        //   num,
+        //   email,
+        //   gender,
+        //   college,
+        //   workingSelect,
+        //   learnWhy,
+        //   socialPlatform,
+        //   information
+        // );
+
+        const userInput = `<h2>Details Submitted:</h2>
+        <p><strong>Name: </strong>${userName}</p>
+        <p><strong>Phone Number: </strong>${num}</p>
+        <p><strong>Email Id: </strong>${email}</p>
+        <p><strong>Gender: </strong>${gender}</p>
+        <p><strong>Are you a college graduate?: </strong>${college}</p>
+        <p><strong>Are you working anywhere full-time or part-time?: </strong>${workingSelect}</p>
+        <p><strong>Why do you want to learn web development?: </strong>${learnWhy}</p>
+        <p><strong>How did you come to know about us? </strong>${socialPlatform}</p>`;
+
+        const divElement = document.getElementById("userDataForWaitlist");
+        divElement.innerHTML = userInput;
+      });
+    </script>
+  </body>
+</html>
